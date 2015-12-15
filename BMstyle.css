@@ -1,0 +1,33 @@
+@import url("skeleton.css");
+@import url("normalize.css");
+
+img{
+  height:300;
+  width:250px;
+  padding: 20px;
+  margin-left: 120px;
+}
+
+.heading{
+  background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSBa2jLQsczTwvWgv60ijW2B26OJfIwGR5b4UXy8ttm5gp8NTYL_w");
+}
+
+h1{
+  font-family: 'Oxygen', sans-serif;
+  color: red;
+  font-size: 36px;
+  text-align: center;
+}
+
+h2{
+  font-family: 'Oxygen', sans-serif;
+  color: green;
+  font-size: 24px;
+  text-align: center;
+}
+
+button{
+  float:right;
+  margin-left: 500px;
+  margin-right: 700px;
+}
