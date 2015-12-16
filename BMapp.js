@@ -12,7 +12,7 @@
 //Constructor:
 
 var allProducts = [];
-var productNames = ['boots', 'chair', 'scissors', 'water_can', 'wine_glass'];
+var productNames = ['boots', 'chair', 'scissors', 'water_can', 'wine_glass', 'bag', 'banana', 'cthulhu', 'dragon', 'pen','shark', 'sweep','unicorn','usb'];
 
   function Product(name,path){
     this.name = name;
@@ -27,6 +27,15 @@ var chair = new Product("chair","BMimgs/chair.jpg");
 var scissors = new Product("scissors","BMimgs/scissors.jpg");
 var water_can = new Product("water_can","BMimgs/water_can.jpg");
 var wine_glass = new Product("wine_glass","BMimgs/wine_glass.jpg");
+var bag = new Product("boots","BMimgs/bag.jpg");
+var banana = new Product("boots","BMimgs/banana.jpg");
+var cthulhu = new Product("boots","BMimgs/cthulhu.jpg");
+var dragon = new Product("boots","BMimgs/dragon.jpg");
+var pen = new Product("boots","BMimgs/pen.jpg");
+var shark = new Product("boots","BMimgs/shark.jpg");
+var sweep = new Product("boots","BMimgs/sweep.png");
+var unicorn = new Product("boots","BMimgs/unicorn.jpg");
+var usb = new Product("boots","BMimgs/usb.gif");
 
 // function buildAlbum(){
 //   for (var i=0; i < allProducts.length; i++){
@@ -42,43 +51,53 @@ var productRank = {
   midObj: null,
   rightObj: null,
   totalClicks: 0,
+  barchart: null,
 
 //Element can only get HTML variables
   leftEl: document.getElementById('img1'),
   midEl: document.getElementById('img2'),
   rightEl: document.getElementById('img3'),
   resultsEl: document.getElementById('results'),
+  //ctx:document.getElementById('myChart').getContext('2d');
 
   getRandomIndex: function(){
     return Math.floor(Math.random() * productNames.length);
   },
 
   displayImages: function() {
-  productRank.leftObj = allProducts[productRank.getRandomIndex()];
-  console.log(productRank.leftObj);
-  productRank.midObj = allProducts[productRank.getRandomIndex()];
-  productRank.rightObj = allProducts[productRank.getRandomIndex()];
+      productRank.leftObj = allProducts[productRank.getRandomIndex()];
+      console.log(productRank.leftObj);
+      productRank.midObj = allProducts[productRank.getRandomIndex()];
+      productRank.rightObj = allProducts[productRank.getRandomIndex()];
 
-  if (productRank.leftObj === productRank.midObj || productRank.leftObj === productRank.rightObj || productRank.midObj === productRank.rightObj){
-  productRank.displayImages();
-  }
+      if (productRank.leftObj === productRank.midObj || productRank.leftObj === productRank.rightObj || productRank.midObj === productRank.rightObj){
+      productRank.displayImages();
+      }
 
-  productRank.leftEl.src = productRank.leftObj.path;
-  productRank.leftEl.id = productRank.leftObj.name;
+      productRank.leftEl.src = productRank.leftObj.path;
+      productRank.leftEl.id = productRank.leftObj.name;
 
-  productRank.midEl.src = productRank.midObj.path;
-  productRank.midEl.id = productRank.midObj.name;
+      productRank.midEl.src = productRank.midObj.path;
+      productRank.midEl.id = productRank.midObj.name;
 
-  productRank.rightEl.src = productRank.rightObj.path;
-  productRank.rightEl.id = productRank.rightObj.name;
+      productRank.rightEl.src = productRank.rightObj.path;
+      productRank.rightEl.id = productRank.rightObj.name;
 
 },
 
   showResults: function(){
   if (productRank.totalClicks % 15 === 0){
     productRank.resultsEl.hidden = false;
-      };
-      console.log(allProducts.tally);
+    // this.resultsButton.addEventListner('click',function(){
+    //   productRank.resultsButton.hidden=true;
+    //   productRank.barChart = new Chart(productRank.ctx).Bar(data);
+    // });
+  } else {
+    productRank.resultsEl.hidden = true;
+  }
+
+
+
 }
 
     // arrange: function(){
@@ -111,7 +130,7 @@ var productRank = {
     console.log("This is the new number: " + productRank.leftObj.tally);
     productRank.showResults();
     productRank.displayImages();
-    });
+  })
 
     productRank.midEl.addEventListener('click', function(){
     productRank.midObj.tally +=1;
@@ -119,7 +138,7 @@ var productRank = {
     console.log("This is the new number: " + productRank.midObj.tally);
     productRank.showResults();
     productRank.displayImages();
-    });
+  })
 
     productRank.rightEl.addEventListener('click', function(){
     productRank.rightObj.tally +=1;
@@ -127,4 +146,18 @@ var productRank = {
     console.log("This is the new number: " + productRank.rightObj.tally);
     productRank.showResults();
     productRank.displayImages();
-    });
+  })
+
+    var resultList = document.getElementById("list");
+    var logResults = function(){
+      for (var i=0; i < allProducts.length; i++){
+        var li = document.createElement("li");
+        li.textContent = "Total number of clicks for " + allProducts[i].name + " is: "+ allProducts[i].tally;
+        resultList.appendChild(li);
+        }
+      }
+
+      var displayResults = document.getElementById('results');
+      displayResults.addEventListener('click', logResults);
+
+productRank.displayImages()
