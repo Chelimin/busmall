@@ -124,13 +124,17 @@ var productRank = {
     //   tallycount.sort(compare);
 
 
+//picture onclick sum tally and totalClicks
+
     productRank.leftEl.addEventListener('click', function(){
     productRank.leftObj.tally +=1;
     productRank.totalClicks +=1;
     console.log("This is the new number: " + productRank.leftObj.tally);
     productRank.showResults();
     productRank.displayImages();
+    onClick();
     })
+
 
     productRank.midEl.addEventListener('click', function(){
     productRank.midObj.tally +=1;
@@ -138,7 +142,9 @@ var productRank = {
     console.log("This is the new number: " + productRank.midObj.tally);
     productRank.showResults();
     productRank.displayImages();
+    onClick();
     })
+
 
     productRank.rightEl.addEventListener('click', function(){
     productRank.rightObj.tally +=1;
@@ -146,11 +152,13 @@ var productRank = {
     console.log("This is the new number: " + productRank.rightObj.tally);
     productRank.showResults();
     productRank.displayImages();
+    onClick();
     })
+
 
 productRank.displayImages()
 
-    // to log results after 15 clicks >>>working code
+    // to log results in a UL after 15 clicks >>>working code
 
     // var resultList = document.getElementById("list");
     // var logResults = function(){
@@ -160,7 +168,8 @@ productRank.displayImages()
     //     resultList.appendChild(li);
     //     }
     //   }
-    //
+
+    //Click button to display results
     var displayResults = document.getElementById('results');
     displayResults.addEventListener('click', makeChart);
     //   //command to clear list but doesnt work ?!
@@ -168,7 +177,7 @@ productRank.displayImages()
 //};
 
 
-    // bar chart data
+    // JSchart: bar chart data
     function makeChart(){
             var barData = {
                   labels : [],
@@ -191,5 +200,16 @@ productRank.displayImages()
             var ctx = document.getElementById("productChart").getContext("2d");
             var newChart = new Chart(ctx).Bar(barData);
 
-onClick="window.location.reload(true)"
 }
+
+//Local storage
+//onclick stringify (convert from JS), setitem: call onclick in the pictures everytime there is a click
+function onClick(){
+      localStorage.setItem("allProds",JSON.stringify(allProducts));
+      }
+
+// if something in local storage, getItem, parse (convert to JS), and overwrite what will come in
+if (localStorage.getItem("allProds") !== null) {
+        console.log("localstorage exists");
+        allProducts = JSON.parse(localStorage.getItem("allProds"));
+        }
